@@ -20,9 +20,9 @@ import java.net.URL;
  */
 public abstract class BaseMobileTest {
 
-    protected TutorialScreen tutorialScreen;
     public static AndroidDriver<AndroidElement> driver;
     public Logger log = Logger.getLogger(BaseMobileTest.class);
+    protected TutorialScreen tutorialScreen;
 
     public void setUpStartApp() {
         tutorialScreen = new TutorialScreen(getDriver());

@@ -23,6 +23,7 @@ public class ConfigCapabilities {
     private static final String JSON_FILE_PATH = "src/test/resources/mobile_capabilities.json";
     private static final String APP = "app";
     private static final String AUTOMATION_NAME = "automationName";
+    private static final String TIMEOUT = "newCommandTimeout";
     private static final JsonParser parser = new JsonParser();
 
     /**
@@ -32,9 +33,9 @@ public class ConfigCapabilities {
      * @author Arley.Bolivar
      */
     public static void applicationSetUp(DesiredCapabilities capabilities) {
-        capabilities.setCapability("appPackage", getJsonDataProperty(APP_PACKAGE));
-        capabilities.setCapability("appActivity", getJsonDataProperty(APP_ACTIVITY));
-        capabilities.setCapability("app", getJsonDataProperty(APP));
+        capabilities.setCapability(APP_PACKAGE, getJsonDataProperty(APP_PACKAGE));
+        capabilities.setCapability(APP_ACTIVITY, getJsonDataProperty(APP_ACTIVITY));
+        capabilities.setCapability(APP, getJsonDataProperty(APP));
     }
 
     /**
@@ -48,6 +49,7 @@ public class ConfigCapabilities {
         capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, getJsonDataProperty(PLATFORM_VERSION));
         capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, getJsonDataProperty(PLATFORM_NAME));
         capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, getJsonDataProperty(AUTOMATION_NAME));
+        capabilities.setCapability(MobileCapabilityType.NEW_COMMAND_TIMEOUT, getJsonDataProperty(TIMEOUT));
     }
 
     /**

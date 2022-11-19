@@ -15,6 +15,14 @@ import static io.appium.java_client.pagefactory.LocatorGroupStrategy.ALL_POSSIBL
  */
 public class DashBoardScreen extends BaseScreen {
 
+    @AndroidFindBy(uiAutomator = "new UiSelector().resourceId(\"android:id/button2\")")
+    private AndroidElement dismissPreferenceUpdateButton;
+    @AndroidFindBy(uiAutomator = "new UiSelector().resourceId(\"dismiss-icon\")")
+    private AndroidElement dismissWelcome;
+    @HowToUseLocators(androidAutomation = ALL_POSSIBLE)
+    @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.ImageView\").description(\"Map, Tab, 2of5\")")
+    private AndroidElement mapButton;
+
     /**
      * Constructor method.
      *
@@ -25,21 +33,17 @@ public class DashBoardScreen extends BaseScreen {
         super(driver);
     }
 
-    // AndroidElements
-    @AndroidFindBy(uiAutomator = "new UiSelector().textContains(\"Close\")")
-    private AndroidElement dismissPreferenceUpdateButton;
-
-    @HowToUseLocators(androidAutomation = ALL_POSSIBLE)
-    @AndroidFindBy(uiAutomator = "new UiSelector().resourceIdMatches(\".*tab_icon.*\").descriptionContains(\"Map\")")
-    @AndroidFindBy(uiAutomator = "//android.widget.ImageView[contains(@content-desc,\"Map\")]")
-    private AndroidElement mapButton;
-
     /**
      * @author Hans.Marquez
      * Navigate to Login Screen from DashBoard Screen.
      */
     public MapScreen goToMapScreen() {
-        click(dismissPreferenceUpdateButton);
+        if (this.isElementAvailable(dismissWelcome, 25)) {
+            click(dismissWelcome);
+        }
+        if (this.isElementAvailable(dismissPreferenceUpdateButton, 25)) {
+            click(dismissPreferenceUpdateButton);
+        }
         click(mapButton);
         return new MapScreen(driver);
     }

@@ -3,10 +3,7 @@ package screens;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AndroidElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
-import io.appium.java_client.pagefactory.HowToUseLocators;
 import util.screens.BaseScreen;
-
-import static io.appium.java_client.pagefactory.LocatorGroupStrategy.ALL_POSSIBLE;
 
 
 /**
@@ -17,6 +14,15 @@ import static io.appium.java_client.pagefactory.LocatorGroupStrategy.ALL_POSSIBL
 
 public class TutorialScreen extends BaseScreen {
 
+    @AndroidFindBy(id = "com.disney.wdpro.dlr:id/permission_primary_btn")
+    private AndroidElement getStartedButton;
+    @AndroidFindBy(id = "com.disney.wdpro.dlr:id/permission_primary_btn")
+    private AndroidElement shareLocationButton;
+    @AndroidFindBy(id = "android:id/button1")
+    private AndroidElement allowLocationButton;
+    @AndroidFindBy(id = "com.android.packageinstaller:id/permission_allow_button")
+    private AndroidElement allowButton;
+
     /**
      * Constructor method.
      *
@@ -26,26 +32,6 @@ public class TutorialScreen extends BaseScreen {
     public TutorialScreen(AndroidDriver<AndroidElement> driver) {
         super(driver);
     }
-
-    @HowToUseLocators(androidAutomation = ALL_POSSIBLE)
-    @AndroidFindBy(uiAutomator = "new UiSelector().resourceIdMatches(\".*permission_primary_btn.*\")")
-    @AndroidFindBy(uiAutomator = "new UiSelector().textContains(\"Get Started\")")
-    private AndroidElement getStartedButton;
-
-    @HowToUseLocators(androidAutomation = ALL_POSSIBLE)
-    @AndroidFindBy(uiAutomator = "new UiSelector().resourceIdMatches(\".*permission_primary_btn.*\")")
-    @AndroidFindBy(uiAutomator = "new UiSelector().textContains(\"Share Location\")")
-    private AndroidElement shareLocationButton;
-
-    @HowToUseLocators(androidAutomation = ALL_POSSIBLE)
-    @AndroidFindBy(uiAutomator = "new UiSelector().resourceIdMatches(\".*button1.*\")")
-    @AndroidFindBy(uiAutomator = "new UiSelector().textContains(\"OK\")")
-    private AndroidElement allowLocationButton;
-
-    @HowToUseLocators(androidAutomation = ALL_POSSIBLE)
-    @AndroidFindBy(uiAutomator = "new UiSelector().resourceIdMatches(\".*permission_allow.*\")")
-    @AndroidFindBy(uiAutomator = "new UiSelector().textContains(\"ALLOW\")")
-    private AndroidElement allowButton;
 
     /**
      * @author Hans.Marquez
