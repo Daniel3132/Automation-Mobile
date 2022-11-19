@@ -27,6 +27,25 @@ public class NavigationTest extends BaseMobileTest {
 
         log.info("Validate Filter Button");
         Assert.assertTrue(map.filterIsDisplayed(), "Filter not displayed");
+
+        tapCategoryList(map);
+    }
+
+    public void tapCategoryList(MapScreen map) {
+        log.info("Validate Attractions option is selected by default");
+        Assert.assertTrue(map.attractionIsSelected(), "Attractions option not selected");
+
+        log.info("Open the list to check is a List container");
+        Assert.assertTrue(map.categoryListIsDisplayed(), "Categories container not displayed");
+
+        log.info("Validate there are eleven options");
+        Assert.assertTrue(map.categoriesOptionSizeIs11(), "There are not eleven options");
+
+        log.info("Validate there is a 'Hotels' Option");
+        Assert.assertTrue(map.checkHotelsOptionIsAvailable(), "'Hotels' option is missing");
+
+        log.info("Validate there are all categories named correct");
+        Assert.assertTrue(map.allCategoriesAreIncluded(), "There is one or more categories missing");
     }
 
 }
