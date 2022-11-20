@@ -5,9 +5,10 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import screens.DashBoardScreen;
 import screens.MapScreen;
+import util.screens.BaseScreen;
 import util.tests.BaseMobileTest;
 
-public class NavigationTest extends BaseMobileTest {
+public class CategoryListTest extends BaseMobileTest {
 
     /**
      * Validate Map Screen Navigation.
@@ -17,7 +18,7 @@ public class NavigationTest extends BaseMobileTest {
     public void navigateToMapScreen() {
         log.info("Start Navigation to Map Screen");
         DashBoardScreen dashBoard = loadDashBoardScreen();
-        MapScreen map = dashBoard.goToMapScreen();
+        MapScreen map = (MapScreen) dashBoard.goToAScreen("map");
 
         log.info("Validate Show List Button");
         Assert.assertTrue(map.showListIsDisplayed(), "Show List not displayed");

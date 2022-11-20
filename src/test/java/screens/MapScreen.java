@@ -125,9 +125,18 @@ public class MapScreen extends BaseScreen {
         categoriesNameList.add("Hotels");
         categoriesNameList.add("Spa and Recreation");
 
-        boolean isValid = false;
+        StringBuilder failedCases = new StringBuilder();
+        boolean isValid = true;
+
         for (int i = 0; i < categoriesOptionsList.size(); i++) {
-            isValid = categoriesOptionsList.get(i).getTagName().contains(categoriesNameList.get(i));
+            if (!categoriesOptionsList.get(i).getTagName().contains(categoriesNameList.get(i))) {
+                isValid = false;
+                failedCases.append(categoriesOptionsList.get(i).getTagName()).append("\n");
+            }
+        }
+
+        if (!isValid) {
+            log.warn("Categories missing: \n" + failedCases);
         }
         return isValid;
     }

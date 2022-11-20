@@ -3,6 +3,7 @@ package screens;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AndroidElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
+import screens.menu.MenuScreen;
 import util.screens.BaseScreen;
 
 /**
@@ -16,9 +17,10 @@ public class DashBoardScreen extends BaseScreen {
     private AndroidElement dismissPreferenceUpdateButton;
     @AndroidFindBy(uiAutomator = "new UiSelector().resourceId(\"dismiss-icon\")")
     private AndroidElement dismissWelcome;
-
     @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.ImageView\").description(\"Map, Tab, 2of5\")")
     private AndroidElement mapButton;
+    @AndroidFindBy(accessibility = "More Options, Tab, 5of5")
+    private AndroidElement menuButton;
 
     /**
      * Constructor method.
@@ -30,18 +32,23 @@ public class DashBoardScreen extends BaseScreen {
         super(driver);
     }
 
-    /**
-     * @author Hans.Marquez
-     * Navigate to Login Screen from DashBoard Screen.
-     */
-    public MapScreen goToMapScreen() {
+    public BaseScreen goToAScreen(String screenName) {
         if (this.isElementAvailable(dismissWelcome, 25)) {
             click(dismissWelcome);
         }
         if (this.isElementAvailable(dismissPreferenceUpdateButton, 25)) {
             click(dismissPreferenceUpdateButton);
         }
-        click(mapButton);
-        return new MapScreen(driver);
+        switch (screenName) {
+            case "map":
+                click(mapButton);
+                return new MapScreen(driver);
+            case "menu":
+                click(menuButton);
+                return new MenuScreen(driver);
+            default:
+                System.out.println("Incorrect screen value");
+                return null;
+        }
     }
 }
