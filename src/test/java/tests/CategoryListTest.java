@@ -16,8 +16,10 @@ public class CategoryListTest extends BaseMobileTest {
     @Description(value = "Map screen Navigation test")
     @Test()
     public void navigateToMapScreen() {
-        log.info("Start Navigation to Map Screen");
+        log.info("Go to dashboard Screen");
         DashBoardScreen dashBoard = loadDashBoardScreen();
+
+        log.info("Start Navigation to Map Screen");
         MapScreen map = (MapScreen) dashBoard.goToAScreen("map");
 
         log.info("Validate Show List Button");
@@ -32,6 +34,10 @@ public class CategoryListTest extends BaseMobileTest {
         tapCategoryList(map);
     }
 
+    /**
+     * Open the List and validate all it's options
+     * @param map
+     */
     public void tapCategoryList(MapScreen map) {
         log.info("Validate Attractions option is selected by default");
         Assert.assertTrue(map.attractionIsSelected(), "Attractions option not selected");

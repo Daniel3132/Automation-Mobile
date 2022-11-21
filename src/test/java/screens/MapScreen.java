@@ -109,7 +109,8 @@ public class MapScreen extends BaseScreen {
 
     /**
      * @author Daniel.Correa
-     * Validate all categories name
+     * Validate all categories name comparing two List with the same size and the same object order.
+     * @return boolean but also logs the wrong cases in case result is false.
      */
     public boolean allCategoriesAreIncluded() {
         List<String> categoriesNameList = new ArrayList<>();

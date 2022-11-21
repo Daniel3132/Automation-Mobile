@@ -21,6 +21,10 @@ public class DashBoardScreen extends BaseScreen {
     private AndroidElement mapButton;
     @AndroidFindBy(accessibility = "More Options, Tab, 5of5")
     private AndroidElement menuButton;
+    @AndroidFindBy(uiAutomator = "new UiSelector().resourceId(\"com.disney.wdpro.dlr:id/tab_animated_icon\")")
+    private AndroidElement addPlansButton;
+    @AndroidFindBy(uiAutomator = "new UiSelector().resourceId(\"com.disney.wdpro.dlr:id/actionSheetItemText\")")
+    private AndroidElement reserveDiningOption;
 
     /**
      * Constructor method.
@@ -32,13 +36,34 @@ public class DashBoardScreen extends BaseScreen {
         super(driver);
     }
 
-    public BaseScreen goToAScreen(String screenName) {
+    public void openAddPlans() {
+        click(addPlansButton);
+    }
+
+    public boolean reserveDiningOptionIsEnabled() {
+        return reserveDiningOption.isEnabled();
+    }
+
+    /**
+     * Check if app ask for welcome or update confirmation and skip them.
+     */
+    public void dismissOptions() {
         if (this.isElementAvailable(dismissWelcome, 25)) {
             click(dismissWelcome);
         }
         if (this.isElementAvailable(dismissPreferenceUpdateButton, 25)) {
             click(dismissPreferenceUpdateButton);
         }
+    }
+
+    /**
+     * Go to the Map or the Menu Screen.
+     *
+     * @param screenName
+     * @return The chosen Screen returned as a BaseScreen and needs to be cast.
+     */
+    public BaseScreen goToAScreen(String screenName) {
+        dismissOptions();
         switch (screenName) {
             case "map":
                 click(mapButton);

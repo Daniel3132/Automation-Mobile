@@ -29,6 +29,11 @@ public class PrivacyAndLegalScreen extends BaseScreen {
         return isElementAvailable(title);
     }
 
+    /**
+     * @author Daniel.Correa
+     * Validate all categories name comparing two List with diferent sizes but the same object order.
+     * @return boolean, but also logs the wrong cases in case result is false.
+     */
     public boolean allOptionsAreIncluded() {
         List<String> optionsNameList = new ArrayList<>();
         optionsNameList.add("Privacy Policy");

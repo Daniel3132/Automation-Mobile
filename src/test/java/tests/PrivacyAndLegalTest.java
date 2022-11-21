@@ -9,17 +9,19 @@ import util.tests.BaseMobileTest;
 
 public class PrivacyAndLegalTest extends BaseMobileTest {
 
+    /**
+     * Open the burger menu, validate the menu screen and all it's options.
+     */
     @Test
-    public void navigateDashboard() {
-        log.info("Start Navigation to Menu Screen");
+    public void navigateMenu() {
+        log.info("Go to dashboard Screen");
         DashBoardScreen dashBoard = loadDashBoardScreen();
+
+        log.info("Start Navigation to Menu Screen");
         MenuScreen menu = (MenuScreen) dashBoard.goToAScreen("menu");
 
         log.info("Scroll down");
         menu.swipeVerticalToEnd();
-
-        log.info("Validate different categories are listed to select");
-        validateCategories(menu);
 
         log.info("Validate different categories are listed to select");
         validateCategories(menu);
@@ -34,6 +36,10 @@ public class PrivacyAndLegalTest extends BaseMobileTest {
         Assert.assertTrue(privacy.allOptionsAreIncluded(), "One or more options not displayed");
     }
 
+    /**
+     * A method for assert only the options in the list.
+     * @param menu
+     */
     public void validateCategories(MenuScreen menu){
         log.info("Validate My profile option is Displayed");
         Assert.assertTrue(menu.myProfileIsDisplayed(), "My profile option not displayed");

@@ -10,5 +10,10 @@
         <classes>
             <class name="tests.PrivacyAndLegalTest"/>
         </classes>
+    </test>
+    <test name="Dashboard Screen Add Plans Test">
+        <classes>
+            <class name="tests.AddPlansTest"/>
+        </classes>
     </test> <!-- Test -->
 </suite> <!-- Suite -->
