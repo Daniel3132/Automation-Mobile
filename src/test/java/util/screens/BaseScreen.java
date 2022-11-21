@@ -1,12 +1,11 @@
 package util.screens;
 
-import io.appium.java_client.TouchAction;
+import io.appium.java_client.MobileBy;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AndroidElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
-import io.appium.java_client.touch.offset.PointOption;
 import org.apache.log4j.Logger;
-import org.openqa.selenium.Dimension;
+import org.openqa.selenium.InvalidSelectorException;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.support.PageFactory;
@@ -45,14 +44,14 @@ public abstract class BaseScreen {
 
     /**
      * Swipe vertical.
-     *
-     * @param percentage of swipe
      */
-    @SuppressWarnings({"rawtypes", "unused"})
-    public void swipeVertical(float percentage) {
-        Dimension windowSize = driver.manage().window().getSize();
-        TouchAction ta = new TouchAction(driver);
-        ta.press(PointOption.point(207, 582)).moveTo(PointOption.point(8, -360)).release().perform();
+    public void swipeVerticalToEnd() {
+        try {
+            driver.findElement(MobileBy.AndroidUIAutomator(
+                    "new UiScrollable(new UiSelector().scrollable(true)).flingToEnd(10)"));
+        } catch (InvalidSelectorException e) {
+            log.warn("invalid selector");
+        }
     }
 
 

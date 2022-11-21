@@ -1,9 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="Suite">
-    <test thread-count="1" name="Test">
+    <test thread-count="1" name="Map Screen Category Test">
         <classes>
-            <class name="tests.NavigationTest"/>
+            <class name="tests.CategoryListTest"/>
+        </classes>
+    </test>
+    <test name="Menu Screen Privacy Test">
+        <classes>
+            <class name="tests.PrivacyAndLegalTest"/>
+        </classes>
+    </test>
+    <test name="Dashboard Screen Add Plans Test">
+        <classes>
+            <class name="tests.AddPlansTest"/>
         </classes>
     </test> <!-- Test -->
 </suite> <!-- Suite -->

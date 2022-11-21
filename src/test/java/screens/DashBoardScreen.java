@@ -3,10 +3,8 @@ package screens;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AndroidElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
-import io.appium.java_client.pagefactory.HowToUseLocators;
+import screens.menu.MenuScreen;
 import util.screens.BaseScreen;
-
-import static io.appium.java_client.pagefactory.LocatorGroupStrategy.ALL_POSSIBLE;
 
 /**
  * DashBoard screen.
@@ -19,9 +17,14 @@ public class DashBoardScreen extends BaseScreen {
     private AndroidElement dismissPreferenceUpdateButton;
     @AndroidFindBy(uiAutomator = "new UiSelector().resourceId(\"dismiss-icon\")")
     private AndroidElement dismissWelcome;
-    @HowToUseLocators(androidAutomation = ALL_POSSIBLE)
     @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.ImageView\").description(\"Map, Tab, 2of5\")")
     private AndroidElement mapButton;
+    @AndroidFindBy(accessibility = "More Options, Tab, 5of5")
+    private AndroidElement menuButton;
+    @AndroidFindBy(uiAutomator = "new UiSelector().resourceId(\"com.disney.wdpro.dlr:id/tab_animated_icon\")")
+    private AndroidElement addPlansButton;
+    @AndroidFindBy(uiAutomator = "new UiSelector().resourceId(\"com.disney.wdpro.dlr:id/actionSheetItemText\")")
+    private AndroidElement reserveDiningOption;
 
     /**
      * Constructor method.
@@ -33,18 +36,44 @@ public class DashBoardScreen extends BaseScreen {
         super(driver);
     }
 
+    public void openAddPlans() {
+        click(addPlansButton);
+    }
+
+    public boolean reserveDiningOptionIsEnabled() {
+        return reserveDiningOption.isEnabled();
+    }
+
     /**
-     * @author Hans.Marquez
-     * Navigate to Login Screen from DashBoard Screen.
+     * Check if app ask for welcome or update confirmation and skip them.
      */
-    public MapScreen goToMapScreen() {
+    public void dismissOptions() {
         if (this.isElementAvailable(dismissWelcome, 25)) {
             click(dismissWelcome);
         }
         if (this.isElementAvailable(dismissPreferenceUpdateButton, 25)) {
             click(dismissPreferenceUpdateButton);
         }
-        click(mapButton);
-        return new MapScreen(driver);
+    }
+
+    /**
+     * Go to the Map or the Menu Screen.
+     *
+     * @param screenName
+     * @return The chosen Screen returned as a BaseScreen and needs to be cast.
+     */
+    public BaseScreen goToAScreen(String screenName) {
+        dismissOptions();
+        switch (screenName) {
+            case "map":
+                click(mapButton);
+                return new MapScreen(driver);
+            case "menu":
+                click(menuButton);
+                return new MenuScreen(driver);
+            default:
+                System.out.println("Incorrect screen value");
+                return null;
+        }
     }
 }
